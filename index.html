@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SnapSplode</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <video id="video" playsinline muted></video>
+    <canvas id="scene"></canvas>
+    <canvas id="overlay"></canvas>
+
+    <header class="brand"><span class="brand-mark"></span>SnapSplode</header>
+
+    <aside id="panel" class="glass">
+      <button id="panel-toggle" aria-label="Collapse panel" aria-expanded="true">‹</button>
+      <div class="panel-body">
+        <span id="obj-cat" class="eyebrow"></span>
+        <h1 id="obj-name"></h1>
+        <p id="obj-blurb" class="muted"></p>
+
+        <div class="row"><span class="label">Scene</span><span id="state-pill" class="pill"></span></div>
+        <div class="row"><span class="label">Hands</span><span id="gesture-now" class="gesture-now">No hand</span></div>
+        <div class="row">
+          <span class="label" id="hand-style-label">Hand markers</span>
+          <div id="hand-style" class="segmented" role="group" aria-labelledby="hand-style-label" title="Press H to switch">
+            <button data-style="off">Off</button><button data-style="subtle">Subtle</button><button data-style="full">Full</button>
+          </div>
+        </div>
+
+        <div class="meter"><div class="row"><span class="label">Hand openness</span><span id="open-val">0%</span></div><div class="bar"><i id="open-bar"></i></div></div>
+        <div class="meter"><div class="row"><span class="label">Exploded view</span><span id="explode-val">0%</span></div><div class="bar gold"><i id="explode-bar"></i></div></div>
+
+        <h2 class="label">Gestures</h2>
+        <ul id="guide"></ul>
+      </div>
+    </aside>
+
+    <div id="stats" class="glass"></div>
+    <div id="toast" role="status"></div>
+    <div id="hint"></div>
+
+    <div id="inspect" class="glass" hidden>
+      <span id="inspect-swatch"></span>
+      <h3 id="inspect-name"></h3>
+      <p id="inspect-note"></p>
+    </div>
+
+    <nav id="picker" class="glass">
+      <div id="tabs" role="tablist"></div>
+      <div id="chips"></div>
+    </nav>
+
+    <section id="start">
+      <div class="start-card">
+        <span class="brand-mark big"></span>
+        <h1>SnapSplode</h1>
+        <p>Snap your fingers, then pull famous objects apart with your hands.</p>
+        <ul>
+          <li><b>Camera</b> tracks your hands</li>
+          <li><b>Microphone</b> hears your snap</li>
+        </ul>
+        <button id="start-btn">Enable camera &amp; mic</button>
+        <p class="muted small">Everything runs on this computer. Video and audio are never recorded or uploaded.</p>
+        <p id="start-status" class="small" role="status"></p>
+      </div>
+    </section>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

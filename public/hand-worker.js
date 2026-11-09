@@ -2,14 +2,16 @@
 // Classic worker: the MediaPipe loader relies on importScripts.
 var module = { exports: {} };
 var exports = module.exports;
-importScripts('/mediapipe/vision_bundle.js');
+// Paths are relative to this file, so the app works from any folder (e.g. GitHub Pages' /snapsplode/).
+const asset = (path) => new URL(path, self.location.href).href;
+importScripts(asset('mediapipe/vision_bundle.js'));
 const { FilesetResolver, HandLandmarker } = module.exports;
 
 let landmarker = null;
 
 async function create(fileset, delegate) {
   return HandLandmarker.createFromOptions(fileset, {
-    baseOptions: { modelAssetPath: '/models/hand_landmarker.task', delegate },
+    baseOptions: { modelAssetPath: asset('models/hand_landmarker.task'), delegate },
     runningMode: 'VIDEO',
     numHands: 2,
     minHandDetectionConfidence: 0.5,
@@ -18,7 +20,7 @@ async function create(fileset, delegate) {
 }
 
 async function init() {
-  const fileset = await FilesetResolver.forVisionTasks('/mediapipe/wasm');
+  const fileset = await FilesetResolver.forVisionTasks(asset('mediapipe/wasm'));
   try {
     landmarker = await create(fileset, 'GPU');
     return 'GPU';

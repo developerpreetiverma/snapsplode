@@ -16,7 +16,7 @@ export class HandTracker {
 
   start() {
     return new Promise((resolve, reject) => {
-      this.worker = new Worker('/hand-worker.js');
+      this.worker = new Worker(`${import.meta.env.BASE_URL}hand-worker.js`);
       this.worker.onerror = (e) => reject(new Error(e.message || 'Hand tracking worker failed'));
       this.worker.onmessage = ({ data }) => {
         if (data.type === 'ready') {
